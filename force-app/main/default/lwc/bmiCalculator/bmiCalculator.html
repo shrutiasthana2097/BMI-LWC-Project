@@ -1,0 +1,67 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="app slds-p-around_medium">
+        
+        <div class="box">
+            <div class="heading slds-text-heading_large"> BMI Calculator</div>
+            <template lwc:if={result}>
+                <div class="info_wrapper slds-var-m-bottom_large">
+                    <section>
+                        <h2 class="boxtitle slds-text-heading_medium"> Here's your BMI </h2>
+                        <template lwc:if={isUnhealthy}>
+                            <p class="slds-text-color_error slds-text-heading_large">{bmiresult}</p> 
+                        </template>
+                        <template lwc:else>
+                            <p class="slds-text-color_success slds-text-heading_large">{bmiresult}</p> 
+                        </template>
+                        <h2 class="boxtitle slds-text-heading_medium"> It means that you're  </h2>
+                        <template lwc:if={isUnhealthy}>
+                            <p class="slds-text-color_error slds-text-heading_small">{result}</p> 
+                        </template>
+                        <template lwc:else>
+                            <p class="slds-text-color_success slds-text-heading_small">{result}</p> 
+                        </template>
+
+                        <button class="slds-button slds-button_neutral slds-button_stretch custom-button slds-var-m-top_large slds-var-m-bottom_large"
+                    onclick={recalculateHandler}>Re-Calculate</button>
+                    </section>
+                    </div>
+            </template>
+            <template lwc:else>
+                <form>
+                    <div class="info_wrapper slds-var-m-bottom_large">
+                    <div class="slds-form-element slds-var-m-bottom_medium">
+                        <label class="slds-form-element__label slds-text-heading_medium" for="text-input-height"> Height (cm)</label>
+                        <div class="slds-form-element__control">
+                        <input type="number" id="text-input-height" name ="height" onchange={inputHandler} value={height} placeholder="Enter your height" min="0" required="" class="slds-input" />
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-var-m-bottom_medium">
+                        <label class="slds-form-element__label slds-text-heading_medium" for="text-input-weight">
+                        Weight (kg)</label>
+                        <div class="slds-form-element__control">
+                        <input type="number" id="text-input-weight" name="weight" onchange={inputHandler} value={weight} placeholder="Enter your weight" min="0" required="" class="slds-input" />
+                        </div>
+                    </div>
+                    <button class="slds-button slds-button_neutral slds-button_stretch custom-button slds-var-m-bottom_large"
+                    onclick={submitHandler}>Get BMI</button>
+                </div>
+            </form>
+            </template>
+            
+            <div class="info_wrapper">
+                <h2 class="boxtitle slds-text-heading_medium"> What your BMI means </h2>
+                <p class="slds-var-m-bottom_medium">Once you have measured your BMI, you can determine your healthy weight range. 
+                    If your BMI is,</p>
+                <p class="slds-text-color_error slds-text-heading_medium">Under 18.5</p>
+                <p class="slds-var-m-bottom_medium">You're underweight.</p>
+                <p class="slds-text-color_success slds-text-heading_medium"> Between 18.5 to 24.9 </p>
+                <p class="slds-var-m-bottom_medium">You have a healthy weight range for young and middle aged adults.</p>
+                <p class="slds-text-color_error slds-text-heading_medium"> Between 25.0 to 29.9 </p>
+                <p class="slds-var-m-bottom_medium"> You're overweight </p>
+                <p class="slds-text-color_error slds-text-heading_medium"> above 30 </p>
+                <p class="slds-var-m-bottom_medium"> You're obese</p>
+            </div>
+        </div>
+    </div>
+</template>
